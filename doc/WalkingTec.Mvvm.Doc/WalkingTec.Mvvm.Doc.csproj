@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Description>WalkingTec.Mvvm</Description>
     <CopyRefAssembliesToPublishDirectory>true</CopyRefAssembliesToPublishDirectory>
     <AssemblyName>WalkingTec.Mvvm.Doc</AssemblyName>
@@ -9,13 +9,6 @@
   </PropertyGroup>
 
   <Import Project="..\..\common.props" />
-
-  <ItemGroup>
-    <None Remove="SetupFiles\Mvc\home\Reg.txt" />
-    <None Remove="SetupFiles\Mvc\LoginController3.txt" />
-    <None Remove="SetupFiles\test\MockController3.txt" />
-    <None Remove="SetupFiles\vms\RegVM.txt" />
-  </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="SetupFiles\Appsettings.txt" />
@@ -62,13 +55,6 @@
     <EmbeddedResource Include="SetupFiles\vms\ChangePasswordVM.txt" />
     <EmbeddedResource Include="SetupFiles\vms\RegVM.txt" />
     <EmbeddedResource Include="SetupFiles\vms\LoginVM.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App">
-      <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
-      <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

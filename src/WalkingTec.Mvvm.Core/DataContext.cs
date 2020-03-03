@@ -1,3 +1,4 @@
+using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -5,11 +6,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Debug;
 using MySql.Data.MySqlClient;
 using Npgsql;
-using Oracle.ManagedDataAccess.Client;
+//using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -495,22 +495,7 @@ namespace WalkingTec.Mvvm.Core
             switch (DBType)
             {
                 case DBTypeEnum.SqlServer:
-                    try
-                    {
-                        var Configs = GlobalServices.GetRequiredService<Configs>();
-                        if (Configs.IsOldSqlServer == true)
-                        {
-                            optionsBuilder.UseSqlServer(CSName, op => op.UseRowNumberForPaging());
-                        }
-                        else
-                        {
-                            optionsBuilder.UseSqlServer(CSName);
-                        }
-                    }
-                    catch
-                    {
-                        optionsBuilder.UseSqlServer(CSName, op => op.UseRowNumberForPaging());
-                    }
+                    optionsBuilder.UseSqlServer(CSName);
                     break;
                 case DBTypeEnum.MySql:
                     optionsBuilder.UseMySql(CSName);
@@ -525,7 +510,7 @@ namespace WalkingTec.Mvvm.Core
                     optionsBuilder.UseSqlite(CSName);
                     break;
                 case DBTypeEnum.Oracle:
-                    optionsBuilder.UseOracle(CSName);
+                    //optionsBuilder.UseOracle(CSName);
                     break;
                 default:
                     break;
@@ -722,7 +707,7 @@ namespace WalkingTec.Mvvm.Core
                     rv = new SqliteParameter(name, value) { Direction = dir };
                     break;
                 case DBTypeEnum.Oracle:
-                    rv = new OracleParameter(name, value) { Direction = dir };
+                    //rv = new OracleParameter(name, value) { Direction = dir };
                     break;
             }
             return rv;

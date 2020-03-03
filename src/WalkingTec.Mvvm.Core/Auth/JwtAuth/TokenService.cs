@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using WalkingTec.Mvvm.Core.Extensions;
 
 namespace WalkingTec.Mvvm.Core.Auth
 {
@@ -148,8 +149,8 @@ namespace WalkingTec.Mvvm.Core.Auth
         public async Task ClearExpiredRefreshTokenAsync()
         {
             var dataTime = DateTime.Now;
-            var mapping = _dc.Model.FindEntityType(typeof(PersistedGrant)).Relational();
-            var sql = $"DELETE FROM {mapping.TableName} WHERE Expiration<=@dataTime";
+            var mapping = _dc.GetTableName<PersistedGrant>();
+            var sql = $"DELETE FROM {mapping} WHERE Expiration<=@dataTime";
             _dc.RunSQL(sql, new
             {
                 dataTime = dataTime

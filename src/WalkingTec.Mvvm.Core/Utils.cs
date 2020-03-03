@@ -52,7 +52,7 @@ namespace WalkingTec.Mvvm.Core
             {
                 try
                 {
-                    if (systemdll.Any(x => dll.Name.StartsWith(x)) == false)
+                    if (systemdll.Any(x=> dll.Name.StartsWith(x)) == false)
                     {
                         rv.Add(AssemblyLoadContext.Default.LoadFromAssemblyPath(dll.FullName));
                     }

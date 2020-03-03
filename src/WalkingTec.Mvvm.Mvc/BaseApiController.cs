@@ -537,7 +537,6 @@ namespace WalkingTec.Mvvm.Mvc
                 dc.SaveChanges();
             }
         }
-
     }
 
 }
