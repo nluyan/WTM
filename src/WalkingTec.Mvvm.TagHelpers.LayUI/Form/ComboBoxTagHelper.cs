@@ -55,7 +55,10 @@ namespace WalkingTec.Mvvm.TagHelpers.LayUI
 
         public ComboBoxTagHelper()
         {
-            EmptyText = Program._localizer["PleaseSelect"];
+            if (EmptyText == null)
+            {
+                EmptyText = Program._localizer["PleaseSelect"];
+            }
             EnableSearch = GlobalServices.GetRequiredService<Configs>().UiOptions.ComboBox.DefaultEnableSearch;
         }
 
@@ -88,7 +91,10 @@ namespace WalkingTec.Mvvm.TagHelpers.LayUI
             {
                 output.Attributes.Add("lay-verify", MultiSelect.Value ? "selectRequired" : "required");
             }
-
+            if(LinkField != null)
+            {
+                output.Attributes.Add("linkto", $"{Core.Utils.GetIdByName(LinkField.ModelExplorer.Container.ModelType.Name + "." + LinkField.Name)}");
+            }
             var contentBuilder = new StringBuilder();
             if (string.IsNullOrEmpty(EmptyText) == false && Disabled == false)
             {
